@@ -1,0 +1,29 @@
+$screen_width: 1200;
+$container_width: 800;
+@mixin adaptive_size($property, $font_in_current_scale, $font_in_the_smallest_screen, $type){
+    $additional_size: $font_in_current_scale - $font_in_the_smallest_screen;
+    @if $type == 1{
+// только уменьшение при уменьшении экрана.
+        #{$property}: $font_in_current_scale + px;
+        @media (max-width: #{$container_width + px}){
+            #{$property}: calc(#{$font_in_the_smallest_screen + px} + #{$additional_size} * ((100vw - 320px) / #{$container_width - 320}));
+        }
+    } @else if $type == 2{
+// только увеличение при увеличении экрана.
+        #{$property}: $font_in_current_scale + px;
+        @media (min-width: #{$screen_width + px}){
+            #{$property}: calc(#{$font_in_the_smallest_screen + px} + #{$additional_size} * ((100vw - 320px) / #{$screen_width - 320}));
+        }
+    } @else{
+// всегда будет изменяться пропорционально ширине экрана.
+        #{$property}: calc(#{$font_in_the_smallest_screen + px} + #{$additional_size} * ((100vw - 320px) / #{$screen_width - 320}));
+    }
+}
+
+.container{
+  max-width: 800px;
+}
+
+.text{
+  @include adaptive_size("fint-size", 50, 20, 1);
+}

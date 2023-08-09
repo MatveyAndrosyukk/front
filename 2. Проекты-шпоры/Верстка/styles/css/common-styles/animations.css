@@ -1,0 +1,65 @@
+/* За сколько.*/
+    transition-duration: 1s, 1s; 
+
+/* Для каких свойств.*/
+    transition-property: background-color, box-shadow;
+
+/* Через сколько начнется.*/
+    transition-delay: 0s, 1s;
+
+/* Как будет происходить анимация.*/
+    transition-timing-function: ease;  /*(начинается медленно, разгоняется и замедляется).*/
+    transition-timing-function: ease-in;    /*(начинается медленно, ускоряется в конце).*/
+    transition-timing-function: ease-out; /*(начинается быстро и замедляется в конце).*/
+    transition-timing-function: ease-in-out; /*(медленно начинается и медленно заканчивается).*/
+    transition-timing-function: linear; /*(равномерно без колебаний в скорости).*/
+    transition-timing-function: steps(3, start); /*(за 3 шага).*/
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55); /*(тут сужается, растягивается и сужается, как резина.)(можно найти в интернете примеры).*/
+
+  /*transition: property duration function delay; можно через запятую для нескольких property.*/ 
+  /*можно как на hover(при убирании курсора), так и на элемент(при наведении курсора и убирании(если есть на hover, то заменяется)).*/
+  /*display не анимируется.*/
+
+
+.example{
+/*Имя keyframes.*/
+   animation-name: white-circle;
+   animation-name: none; /*(анимации не будет(можно повесить на hover)).*/
+
+/*Длительность.*/
+   animation-duration: 1s;
+
+/*Как будет происходить.*/
+   animation-timing-function: ease;
+
+/*Сколько раз.*/
+   animation-iteration-count: 3;
+   animation-iteration-count: infinite;
+
+/*Направление.*/
+   animation-direction: alternate; /*(вперед и назад).*/
+   animation-direction: reverse; /*задом наперед).*/
+
+/*Состояние.*/
+   animation-play-state: running; /*(по умолчанию).*/
+   animation-play-state: paused; /*(останвливается(можно повесить на hover)).*/
+
+/*Задержка.*/
+   animation-delay: 2s; 
+
+/*Поведение при завершении.*/
+   animation-fill-mode: none; /*(по умолчанию, когда анимация кончится, к ней применятся первичные стили).*/
+   animation-fill-mode: forwards; /*(когда анимация закончится, применятся стили последнего кадра).*/
+
+/*Общая запись.*/
+   animation name, duration, function, iteration, direction, delay, mode;
+}
+
+@keyframes white-circle{
+   0%{
+      left: 0;
+   }
+   100%{
+      left: 500px;
+   }
+}

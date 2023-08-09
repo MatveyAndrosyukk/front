@@ -1,0 +1,91 @@
+.grid__body{
+/*Элементы grid всегда становятся блочными. */
+    display: grid;
+/*Создание колонок и рядов. */
+    grid-template-columns: 200px 200px 200px; /*(3 колонки по 200 пикселей).*/
+    grid-template-columns: 1fr 1fr 1fr; /*(3 колонк одинакового размера на всю ширину).*/
+    grid-template-columns: 200px minmax(150px, 1fr) 200px; /*(2 колонка будет расстягиваться сколько может, а сужаться только до 150px).*/
+    grid-template-columns: auto 200px 200px; /*(1 колонка будет расширяться от контента).*/
+    grid-template-columns: fit-content(400px) 200px 200px; /*(1 колонка будет auto, но расширяться может только до 400px).*/
+    grid-template-columns: repeat(3, 1fr); /*(будет 3 колонки по 1fr).*/
+
+/*Создание и колонок и рядов сразу. */
+    grid-template: repeat(2, 1fr) / repeat(3, 1fr); /*(сначала ряды, потом колонки).*/
+    
+/*Управление неявной сеткой. */
+    grid-auto-rows: 200px; /*(управляет высотой рядов из неявной сетки).*/
+    grid-auto-columns: 100px; /*(работает только когда не задана явная сетка).*/
+
+/*Управление переполнением. */
+    grid-auto-flow: row; /*(новые элементы будут выстраиваться в новый ряд(если не задано grid-template-rows)).*/
+
+/*Управление элементами. */
+    justify-items: stretch; /*(содержимое растягивается под размер колонки по ширине).*/
+    align-items: stretch; /*(содержимое растягивается под размер колонки по высоте).*/
+    justify-items: start; /*(содержимое растягивается под размер контента в колонке по ширине).*/
+    align-items: start; /*(содержимое растягивается под размер контента в колонке по высоте).*/
+
+/*Расстояние между рядами и строками. */
+    row-gap: 20px; /*(отступы рядов).*/
+    column-gap: 20px; /*(отступы колонок).*/
+}
+
+.grid__item{
+/*Позиция элемента в контейнере. */
+    grid-row-start: 2; /*(начинается со 2 ряда).*/
+    grid-row-end: 3; /*(заканчивается на 3 ряду).*/
+    grid-column-start: 2; /*(начинается на 2 колонке).*/
+    grid-column-end: 3; /*(заканчивается на 3).*/
+    grid-column-start: span 3; /*(будет занимать 1 ряд и 3 колонки).*/
+    grid-row-start:  span 2; /*(будет занимать 1 колонку и 2 ряда).*/
+
+/*Еще 1 вид расположения. */
+    grid-row: 1 / 3; /*(занимает первые 2 ряда).*/
+    grid-column: 1 / 3; /*(занимает первые 2 колонки).*/
+    grid-row: start / row-end; 
+
+/*Очередь в контейнере(задается каждому). */
+    order: 1;
+
+/*Для элемента для расположения. */
+    justify-self: start;
+    align-self: end;
+    margin: auto; /*(элемент будет по центру и занимать ширину и высоту контента).*/
+
+/*Еще удобное задание сетки */
+/*задать родителю */
+    grid-template-rows: [start] 1fr [row2] 1fr [row-end];
+    grid-template-columns: [start] 1fr [col2] 1fr [col3] 1fr [col-end];
+
+/*задать элементу */
+    grid-row-start: row2;
+    grid-column-start: col2;
+}
+/*Для структуры grid__wrapper > grid__header, grid__side, grid__content: */
+.grid__wrapper{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas: /*(header займет 2 колонки в 1 ряду, а во 2 ряду, сайд займет 1 колонку, а контент вторую). */
+     "header header"
+     "side content";
+
+/* Заменяет предыдущие 3 записи. */
+    grid-template: 
+    [start] "header header" 100px [row2]
+    [row2] "side content" 1fr [row-end] / 150px 1fr;
+
+}
+
+.grid__header{
+    grid-area: header;
+}
+
+.grid__side{
+    grid-area: side;
+}
+
+.grid__content{
+    grid-area: content;
+}
+
